@@ -20,7 +20,7 @@ function register(req, res, next) {
                             error: err
                         })
                     } else {
-                        arj.ok(res, true, {
+                        arj.created(res, true, {
                             status: "success",
                             message: "บันทึกข้อมูลสำเร็จ",
                             data: result
