@@ -21,21 +21,18 @@ function dashboard(req, res, next) {
 
                 mysql.query(_sql, function (err, result) {
                     if (err) {
-                        arj.unauthorized(res, false, {
+                        arj.unauthorized(res, false,"ดึงข้อมูลผิดพลาด", {
                             status: "error",
-                            message: "ดึงข้อมูลผิดพลาด",
                             error: err
                         })
                     } else if (result.length !== 0){
-                        arj.ok(res, true, {
+                        arj.ok(res, true,"ใช้งานอยู่", {
                             status: "success",
-                            message: "ใช้งานอยู่",
                             data: decoded.data
                         })
                     }else{
-                        arj.unauthorized(res, false, {
+                        arj.unauthorized(res, false,"ไม่ได้ใช้งานอยู่", {
                             status: "error",
-                            message: "ไม่ได้ใช้งานอยู่",
                             data: []
                         })
                     }
@@ -45,9 +42,8 @@ function dashboard(req, res, next) {
        
 
     } else {
-        arj.unauthorized(res, false, {
+        arj.unauthorized(res, false,"กรอกข้อมูลไม่ครบ", {
             status: "error",
-            message: "กรอกข้อมูลไม่ครบ"
         })
     }
 

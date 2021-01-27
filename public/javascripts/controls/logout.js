@@ -23,23 +23,20 @@ function logout(req, res, next) {
 
         mysql.query(_sql, function (err, result) {
             if (err) {
-                arj.unauthorized(res, false, {
+                arj.unauthorized(res, false,"ลบข้อมูลผิดพลาด", {
                     status: "error",
-                    message: "ลบข้อมูลผิดพลาด",
                     error: err
                 })
             } else {
-                arj.ok(res, true, {
-                    status: "success",
-                    message: "logout"
+                arj.ok(res, true,"logout", {
+                    status: "success"
                 })
             }
         })
 
     } else {
-        arj.unauthorized(res, false, {
+        arj.unauthorized(res, false,"กรอกข้อมูลไม่ครบ", {
             status: "error",
-            message: "กรอกข้อมูลไม่ครบ"
         })
     }
 

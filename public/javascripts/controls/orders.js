@@ -19,20 +19,20 @@ function orders(req, res, next) {
 
         mysql.query(_sql, function (err, result) {
             if (err) {
-                arj.unauthorized(res, false, {
+                arj.unauthorized(res, false, "บันทึกข้อมูลผิดพลาด",{
                     status: "error",
                     message: "บันทึกข้อมูลผิดพลาด",
                     error: err
                 })
             } else if (result.length !== 0) {
-                arj.ok(res, true, {
+                arj.ok(res, true,"ดึงข้อมูลสำเร็จ", {
                     status: "success",
                     message: "ดึงข้อมูลสำเร็จ",
                     data: result
                 })
 
             } else {
-                arj.unauthorized(res, false, {
+                arj.unauthorized(res, false, "ไม่พบรายการสั่งอาหาร", {
                     status: "error",
                     message: "ไม่พบรายการสั่งอาหาร",
                     data: []
@@ -54,31 +54,27 @@ function orders(req, res, next) {
 
             mysql.query(_sql, function (err, result) {
                 if (err) {
-                    arj.unauthorized(res, false, {
+                    arj.unauthorized(res, false,"บันทึกข้อมูลผิดพลาด", {
                         status: "error",
-                        message: "บันทึกข้อมูลผิดพลาด",
                         error: err
                     })
                 } else if (result.length !== 0) {
-                    arj.ok(res, true, {
+                    arj.ok(res, true,"ดึงข้อมูลสำเร็จ", {
                         status: "success",
-                        message: "ดึงข้อมูลสำเร็จ",
                         data: result
                     })
 
                 } else {
-                    arj.unauthorized(res, false, {
+                    arj.unauthorized(res, false,"ไม่พบรายการสั่งอาหาร", {
                         status: "error",
-                        message: "ไม่พบรายการสั่งอาหาร",
                         data: []
                     })
                 }
             })
 
         } else {
-            arj.unauthorized(res, false, {
-                status: "error",
-                message: "กรอกข้อมูลไม่ครบ"
+            arj.unauthorized(res, false,"กรอกข้อมูลไม่ครบ", {
+                status: "error"
             })
         }
 

@@ -14,9 +14,8 @@ function login(req, res, next) {
 
         mysql.query(_sql, function (err, result) {
             if (err) {
-                arj.unauthorized(res, false, {
+                arj.unauthorized(res, false, "บันทึกข้อมูลผิดพลาด",{
                     status: "error",
-                    message: "บันทึกข้อมูลผิดพลาด",
                     error: err
                 })
             } else if (result.length !== 0) {
@@ -51,18 +50,16 @@ function login(req, res, next) {
                         })
                     } else {
 
-                        arj.unauthorized(res, false, {
+                        arj.unauthorized(res, false,"password ไม่ถูกต้อง", {
                             status: "error",
-                            message: "password ไม่ถูกต้อง",
                             data: []
                         })
                     }
                 })
 
             } else {
-                arj.unauthorized(res, false, {
+                arj.unauthorized(res, false,"ไม่พบผู้ใช้", {
                     status: "error",
-                    message: "ไม่พบผู้ใช้",
                     data: []
                 })
             }

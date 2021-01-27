@@ -7,25 +7,25 @@ function products(req, res, next) {
 
     const _query_key = Object.keys(_query);
     
-    if (typeof _query === 'undefined') {
+    if (typeof _query.limit === 'undefined') {
         let _sql = `SELECT * FROM Products ORDER BY RAND() DESC`;
 
         mysql.query(_sql, function (err, result) {
             if (err) {
-                arj.unauthorized(res, false, {
+                arj.unauthorized(res, false,"บันทึกข้อมูลผิดพลาด", {
                     status: "error",
                     message: "บันทึกข้อมูลผิดพลาด",
                     error: err
                 })
             } else if (result.length !== 0) {
-                arj.ok(res, true, {
+                arj.ok(res, true,"ดึงข้อมูลสำเร็จ", {
                     status: "success",
                     message: "ดึงข้อมูลสำเร็จ",
                     data: result
                 })
 
             } else {
-                arj.unauthorized(res, false, {
+                arj.unauthorized(res, false, "ไม่พบรายการสั่งอาหาร",{
                     status: "error",
                     message: "ไม่พบรายการสั่งอาหาร",
                     data: []
@@ -38,31 +38,27 @@ function products(req, res, next) {
 
             mysql.query(_sql, function (err, result) {
                 if (err) {
-                    arj.unauthorized(res, false, {
+                    arj.unauthorized(res, false,"บันทึกข้อมูลผิดพลาด", {
                         status: "error",
-                        message: "บันทึกข้อมูลผิดพลาด",
                         error: err
                     })
                 } else if (result.length !== 0) {
-                    arj.ok(res, true, {
+                    arj.ok(res, true,"ดึงข้อมูลสำเร็จ", {
                         status: "success",
-                        message: "ดึงข้อมูลสำเร็จ",
                         data: result
                     })
 
                 } else {
-                    arj.unauthorized(res, false, {
+                    arj.unauthorized(res, false, "ไม่พบรายการสั่งอาหาร",{
                         status: "error",
-                        message: "ไม่พบรายการสั่งอาหาร",
                         data: []
                     })
                 }
             })
 
         } else {
-            arj.unauthorized(res, false, {
+            arj.unauthorized(res, false,"กรอกข้อมูลไม่ครบ", {
                 status: "error",
-                message: "กรอกข้อมูลไม่ครบ"
             })
         }
 

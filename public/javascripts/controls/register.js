@@ -14,31 +14,27 @@ function register(req, res, next) {
                 let _sql = `INSERT INTO Users SET name = '${_body.name}', email = '${_body.email}', password = '${hash}'`
                 mysql.query(_sql, function (err, result) {
                     if (err) {
-                        arj.unauthorized(res, false, {
+                        arj.unauthorized(res, false,"บันทึกข้อมูลผิดพลาด", {
                             status: "error",
-                            message: "บันทึกข้อมูลผิดพลาด",
                             error: err
                         })
                     } else {
-                        arj.created(res, true, {
+                        arj.created(res, true,"บันทึกข้อมูลสำเร็จ", {
                             status: "success",
-                            message: "บันทึกข้อมูลสำเร็จ",
                             data: result
                         })
                     }
                 })
             })
         }else{
-            arj.unauthorized(res, false, {
+            arj.unauthorized(res, false,"รหัสไม่ตรงกัน", {
                 status: "error",
-                message: "รหัสไม่ตรงกัน"
             }) 
         }
        
     } else {
-        arj.unauthorized(res, false, {
+        arj.unauthorized(res, false,"กรอกข้อมูลไม่ครบ", {
             status: "error",
-            message: "กรอกข้อมูลไม่ครบ"
         })
     }
 
